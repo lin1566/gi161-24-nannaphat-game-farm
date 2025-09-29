@@ -27,11 +27,6 @@ public abstract class Animal : MonoBehaviour
         Happiness = 50;
         PreferedFood = preferredFood;
     }
-   /* protected virtual void Awake()
-    {
-        if (Hunger == 0) Hunger = 50;
-        if (Happiness == 0) Happiness = 50;
-    }*/
 
     public void AdjustHunger(int amount)
     {
@@ -43,6 +38,7 @@ public abstract class Animal : MonoBehaviour
     {
         Happiness += amount;
         if (Happiness > 100) Happiness = 100; // สมมติ max happiness = 100
+        
     }
     public void Status()
     {
@@ -53,9 +49,9 @@ public abstract class Animal : MonoBehaviour
     public void Feed(int amount)
     {
         Hunger = Mathf.Max(MinValue, Hunger - amount);
-        Happiness = Mathf.Min(MaxValue, Happiness + amount / 2);
+        Happiness = Mathf.Min(MaxValue, Happiness + amount );
 
-        Debug.Log($"{Name} was fed {amount} units of generic food. Current Happiness: {Happiness}");
+        Debug.Log($"{Name} was fed {amount} units of generic food. Current Happiness: {Happiness}"); // Why???? How EX to happiness to 72 ?????? 
     }
 
     // Feed แบบ 2

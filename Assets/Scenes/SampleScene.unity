@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &372229885 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5875131319485802720, guid: e6ed812bc3d04514484cd6f9571daa89, type: 3}
+  m_PrefabInstance: {fileID: 8081243577470082205}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92909fcedb921ce43ac256bcce8de039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pig
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +319,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1433590612 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6165290049693140966, guid: be1d90cec428f3745beeaa3a05d26653, type: 3}
+  m_PrefabInstance: {fileID: 1695368738}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9caf13c5f549534d9c4fb833b4b32fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Chicken
 --- !u!1001 &1695368738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -409,7 +431,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f575081476b5dcf46aeac0d55b90dbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  animals: []
+  animalPrefabs:
+  - {fileID: 1433590612}
+  - {fileID: 8801319715306295074}
+  - {fileID: 372229885}
 --- !u!1001 &8081243577470082205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -524,6 +549,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a51f97d387728b345addd65993a7dafd, type: 3}
+--- !u!114 &8801319715306295074 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2177078443994725377, guid: a51f97d387728b345addd65993a7dafd, type: 3}
+  m_PrefabInstance: {fileID: 8801319715306295073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7734c32999341e14c9ad3bd7a8be459e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cow
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

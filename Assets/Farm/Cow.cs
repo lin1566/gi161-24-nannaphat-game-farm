@@ -21,7 +21,15 @@ public class Cow : Animal
 
     public override string Produce()
     {
-        Milk += 1.5f; // สมมติผลิตนม 1.5 ลิตร
-        return $"Milk {Milk} L";
+        if (Happiness > 70)
+        {
+            float milkProduced = Happiness / 10f; // ปริมาณนมที่ผลิตได้ในรอบนี้
+            Milk += milkProduced;            // ✅ สะสมเพิ่มเข้าไป
+            return $"Total Milk: {Milk:F1} units";
+        }
+        else
+        {
+            return $"{Name} is not happy enough to produce milk.";
+        }
     }
 }
