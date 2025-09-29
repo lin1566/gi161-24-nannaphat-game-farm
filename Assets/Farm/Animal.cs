@@ -1,77 +1,83 @@
-using System;
 using UnityEngine;
-
-public abstract class Animal : MonoBehaviour
-    //abstract
+public enum FoodType
 {
-    private string name;
-    private int hunger;
-    private int happiness;
+    Hay,        // Cow ชอบ
+    Grain,      // Chicken ชอบ
+    Scraps,     // Pig ชอบ
+    RottenMeat, // ทุกตัวไม่ชอบ
+    AnimalFood  // อาหารทั่วไป
+}
+public abstract class Animal : MonoBehaviour
+{
+    public string Name { get; private set; }
+    public int Hunger { get; private set; }
+    public int Happiness { get; private set; }
 
-    public string Name
+   // protected FoodType PreferredFood;
+    public FoodType PreferedFood { get; protected set; }
+
+
+    protected int MinValue = 0;
+    protected int MaxValue = 100;
+
+    public Animal(string name, FoodType preferredFood)
     {
-        get => name;
-        set => name = string.IsNullOrEmpty(value) ? "Unknown" : value;
+        Name = name;
+        Hunger = 50;
+        Happiness = 50;
+        PreferedFood = preferredFood;
+    }
+   /* protected virtual void Awake()
+    {
+        if (Hunger == 0) Hunger = 50;
+        if (Happiness == 0) Happiness = 50;
+    }*/
+
+    public void AdjustHunger(int amount)
+    {
+        Hunger += amount;
+        if (Hunger < 0) Hunger = 0;
     }
 
-    public int Hunger
+    public void AdjustHappiness(int amount)
     {
-        get { return hunger; }
-        set
-        {
+        Happiness += amount;
+        if (Happiness > 100) Happiness = 100; // สมมติ max happiness = 100
+    }
+    public void Status()
+    {
+        Debug.Log($"{Name} -> Hunger: {Hunger} | Happiness: {Happiness} | Prefered Food: {PreferedFood}");
+    }
 
-            if (value < 0) hunger = 0;
-            else if (value > 50) hunger = 50;
-            else hunger = value;
+    // Feed แบบ 1
+    public void Feed(int amount)
+    {
+        Hunger = Mathf.Max(MinValue, Hunger - amount);
+        Happiness = Mathf.Min(MaxValue, Happiness + amount / 2);
+
+        Debug.Log($"{Name} was fed {amount} units of generic food. Current Happiness: {Happiness}");
+    }
+
+    // Feed แบบ 2
+    public void Feed(FoodType food, int amount)
+    {
+        if (food == PreferedFood)
+        {
+            Hunger = Mathf.Max(MinValue, Hunger - amount);
+            Happiness = Mathf.Min(MaxValue, Happiness + 15);
+            Debug.Log($"{Name} was fed {amount} units of preferred food : {food}, Happiness increased 15 units, Current Happiness: {Happiness}");
+        }
+        else if (food == FoodType.RottenMeat)
+        {
+            Happiness = Mathf.Max(MinValue, Happiness - 20);
+            Debug.Log($"{Name} was fed with rotten food : {food}. Unhappy! Happiness decreased 20 units, Current Happiness: {Happiness}");
+        }
+        else
+        {
+            Feed(amount); // ใช้ logic แบบ generic
         }
     }
 
-    public int Happiness
-    {
-
-        get { return happiness; }
-        set
-        {
-            if (value < 0) happiness = 0;
-            else if (value > 50) happiness = 50;
-            else happiness = value;
-        }
-    }
-
-    public void Init(string newName, int newHunger, int newHappiness)
-    {
-        Name = newName;
-        Hunger = newHunger;
-        Happiness = newHappiness;
-    }
-
-    public void AdjustHunger(int cost)
-    {
-        Hunger += cost;
-    }
-
-    public void AsjustHappiness(int cost)
-    {
-        Happiness += cost;
-    }
-    public virtual void MakeSound() //Overiding ( virtual ) ใส่เข้าไปแล้วฝั่งลูกห็ใส่ override ด้วย จะได้เรียกได้
-    {
-        Debug.Log("Animal makes a sound.");
-    }
-    public  void Feed(int cost) //overloading 
-    {
-        AdjustHunger(cost);
-        Debug.Log($"{Name}  fed {cost} units of food.");
-    }
-    public  void Feed(int cost,string food) //overliading
-    {
-        AdjustHunger(cost);
-        Debug.Log($"{Name} was fed {cost} units of {food}.");
-    }
-    public void GetStatus()
-    {
-        Debug.Log($"{Name}-> Hunger: {Hunger} | Happiness: {Happiness}");
-    }
-
-    
+    public abstract void MakeSound();
+    public abstract string Produce();
 }

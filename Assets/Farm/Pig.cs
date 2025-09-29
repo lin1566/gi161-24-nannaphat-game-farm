@@ -1,12 +1,22 @@
-
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Pig : Animal
 {
-    public override void MakeSound()
+    public int Pork { get; private set; }
+
+    public Pig(string name) : base(name, FoodType.Scraps) // สมมติว่าหมูกิน AnimalFood
     {
-        Debug.Log($"{Name} says Oink Oink");
+        Pork = 0;
     }
 
-   
+    public override void MakeSound()
+    {
+        Debug.Log($"{Name} says: Oink! 🐷");
+    }
+
+    public override string Produce()
+    {
+        Pork++;
+        return $"Pork {Pork}";
+    }
 }

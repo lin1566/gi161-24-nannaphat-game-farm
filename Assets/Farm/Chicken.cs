@@ -1,18 +1,28 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-
-public class Chicken: Animal    
+public class Chicken : Animal
 {
+    public int Eggs { get; private set; }
+
+    public Chicken(string name) : base(name, FoodType.Grain) // ไก่ชอบเมล็ดพืช
+    {
+        Eggs = 0;
+    }
+
+    public void  Sleep()
+    {
+        Debug.Log($"{Name} is sleeping... ZZZZZZZZ");
+        AdjustHappiness(5);
+    }
+
     public override void MakeSound()
     {
-      Debug.Log($"{Name} : Cluck Cluck!");
+        Debug.Log($"{Name} says: Cluck!Cluck! ");
     }
-    
-    public  void Sleep()
+
+    public override string Produce()
     {
-       
-        Debug.Log($"{Name} is Sleep Status Hunger:+10 Happiness:+15");
-        
+        Eggs++;
+        return $"Egg {Eggs}";
     }
-    
 }
